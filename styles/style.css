@@ -1,0 +1,47 @@
+@import url('hero.css');
+p {
+    margin: 0;
+    /*color: white;*/
+}
+body {
+    display: flex;
+    font-size: 3em;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+header {
+    display: flex;
+    justify-content: center;
+    font: bold;
+    font-size: 2rem;
+}
+section {
+    margin: 0 5%;
+}
+.game-field {
+    background-color: rgb(216, 169, 81);
+    background-image: url('/img/backgrounds/western-town.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80vh;
+}
+.field-elements {
+    height: 80%;
+}
+.field-hero {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.score {
+    background-color: rgb(180, 138, 60);
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: rgb(255, 217, 147);
+    font-size: calc(1.6vw + 1rem);
+}

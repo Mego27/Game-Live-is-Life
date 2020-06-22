@@ -1,0 +1,12 @@
+.hero {
+    width: 12%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform .4s linear;
+}
+.image {
+    max-width: 100%;
+    max-height: 100%;
+}
