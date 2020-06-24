@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform .4s linear;
+    transition: transform 7s linear;
     overflow: hidden;
 }
 .image-element {

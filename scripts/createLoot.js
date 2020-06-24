@@ -1,4 +1,4 @@
-export default function createElement(srcPicture) {
+export default function createLoot(srcPicture) {
     const field = document.getElementsByClassName('game-field')[0];
     const element = document.createElement('div');
     element.classList.add('element');
@@ -11,6 +11,12 @@ export default function createElement(srcPicture) {
     element.appendChild(borderDiv);
     //hero.textContent = 'Cowboy';
     field.appendChild(element);
-    return element;
+    let data = {
+        link: element,
+        height: picture.height,
+        width: picture.width
+    };
+    return data;
 }
+
 //module.export = createHero;

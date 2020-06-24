@@ -1,32 +1,39 @@
 import createHero from './createHero.js'
 import moveHero from './moveHero.js'
-import createElement from './createElement.js';
-import moveElement from './moveElement.js'
+import createLoot from './createLoot.js';
+import {moveLoot, changeMoveSpeed} from './moveLoot.js'
 
+const loots = [];
+let loot;
 let heroX = 0;
-let heightElem;
 let heightHero;
-let defaultTimer = 15;
+let heightGameField;
+let defaultTimer = 10;
 document.getElementById('timer').innerText = 'Timer(sec): ' + defaultTimer;
 const hero = createHero('./img/heroes/shooting-clipart-cow-boy-PNG.png');
 hero.style.visibility = 'hidden';
-let elem = createElement('./img/heroes/shooting-clipart-cow-boy-PNG.png');
-elem.style.visibility = 'hidden';
 const halfWidthHero = hero.offsetWidth/2;
 let defaultIncrement = hero.offsetLeft/halfWidthHero*1.5;
 let increment = defaultIncrement;
-document.getElementsByClassName('button-start')[0].addEventListener('click', startGame.bind(null, hero, elem));
-let timer2= 10;
+document.getElementsByClassName('button-start')[0].addEventListener('click', startGame.bind(null, hero, loot));
+const scoreText = document.getElementsByClassName('score-label')[0];
 
-function startGame(hero, elem) {
+window.onload = () => {
+    for(let i = 0; i < defaultTimer; i++) {
+        loot = createLoot('./img/heroes/shooting-clipart-cow-boy-PNG.png');
+        loots.push(loot);
+        loot.link.style.top = '-' + loot.height + 'px';
+    }
+    console.log(loots)
+}
+
+function startGame(hero) {
     let currentTimer = defaultTimer;
-    heightElem = window.getComputedStyle(elem, null).height;
+    let score = 0;
     heightHero = window.getComputedStyle(hero, null).height;
-    timer2 = 10;
+    heightGameField = window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).height;
     document.getElementsByClassName('button-start')[0].style.visibility = 'hidden';
     hero.style.visibility = 'visible';
-    elem.style.top = '-' + heightElem;
-    elem.style.visibility = 'visible';
     increment = defaultIncrement;
     let intervalTimer = setInterval(function() {
         currentTimer--;
@@ -34,15 +41,32 @@ function startGame(hero, elem) {
         document.getElementById('timer').innerText = 'Timer(sec): ' + currentTimer;
         if (currentTimer === 0) {
             clearInterval(intervalTimer);
+            clearInterval(intervalMovingElements);
             document.getElementsByClassName('button-start')[0].style.visibility = 'visible';
             hero.style.visibility = 'hidden';
-            elem.style.visibility = 'hidden';
+            loot.link.style.visibility = 'hidden';
             document.getElementById('timer').innerText = 'Timer(sec): ' + defaultTimer;
         }
     }, 1000);
+    moveLoot(loot.link, loot.height + Number(heightGameField.replace('px','')));
     let intervalMovingElements = setInterval(function() {
-        moveElement(elem, increment/5);
-    }, 10)
+        let matrix = window.getComputedStyle(loot.link, null).transform;
+        matrix = matrix.split(/\(|,\s|\)/).slice(1,7);
+        //console.log(matrix[5]-heightElem.replace('px','')/2);
+        if ((heroX - halfWidthHero < matrix[4]) &&
+            (heroX + halfWidthHero > matrix[4]) &&
+            (heightGameField.replace('px','') - heightHero.replace('px','') < matrix[5]) &&
+            (heightGameField.replace('px','') - heightHero.replace('px','')/2 
+            > matrix[5]-loot.height/2)) {
+            score++;
+            scoreText.innerText = 'Score: ' + score;
+            loot.link.parentNode.removeChild(loot.link);
+            loot = null;
+            //elem = createElement('./img/heroes/shooting-clipart-cow-boy-PNG.png');
+            //elem.style.top = '-' + heightElem;
+        }
+        
+    }, 50);
 }
 
 document.addEventListener('keydown', function(event) {
