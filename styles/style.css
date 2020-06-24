@@ -105,6 +105,7 @@ section {
 .score {
     background-color: rgb(180, 138, 60);
     height: 10vh;
+    z-index: 1;
     display: flex;
     justify-content: space-around;
     align-items: center;
