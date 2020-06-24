@@ -35,16 +35,14 @@ section {
     align-items: center;
     height: 80vh;
 }
-.field-elements {
-    height: 80%;
-    width: 100%;
-}
 .field-hero {
-    height: 20%;
+    position: absolute;
+    bottom: 0;
+    height: fit-content;
+    min-height: max-content;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 .button-start {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -104,7 +102,7 @@ section {
 }
 .score {
     background-color: rgb(180, 138, 60);
-    height: 10vh;
+    padding: 2% 0;
     z-index: 1;
     display: flex;
     justify-content: space-around;
