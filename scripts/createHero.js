@@ -3,9 +3,9 @@ export default function createHero(srcPicture) {
     const hero = document.createElement('div');
     hero.classList.add('hero');
     hero.id = 'hero';
+    let borderDiv = document.createElement('div');
     let picture = document.createElement('img');
     picture.src = srcPicture;
-    picture.classList.add('image');
     hero.appendChild(picture);
     //hero.textContent = 'Cowboy';
     field.appendChild(hero);
