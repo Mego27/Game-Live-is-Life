@@ -1,4 +1,4 @@
-export default function createLoot(srcPicture) {
+export default function createLoot(srcPicture, width) {
     const field = document.getElementsByClassName('game-field')[0];
     const element = document.createElement('div');
     element.classList.add('element');
@@ -11,10 +11,12 @@ export default function createLoot(srcPicture) {
     element.appendChild(borderDiv);
     //hero.textContent = 'Cowboy';
     field.appendChild(element);
+    let random = Math.floor(Math.random() * (width/2 - (-width/2))) - width/2;
     let data = {
         link: element,
         height: picture.height,
-        width: picture.width
+        width: picture.width,
+        x: random
     };
     return data;
 }

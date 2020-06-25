@@ -19,10 +19,13 @@ document.getElementsByClassName('button-start')[0].addEventListener('click', sta
 const scoreText = document.getElementsByClassName('score-label')[0];
 
 window.onload = () => {
+    let widthGameField = window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).width.replace('px','');
     for(let i = 0; i < defaultTimer; i++) {
-        loot = createLoot('./img/heroes/shooting-clipart-cow-boy-PNG.png');
+        loot = createLoot('./img/heroes/shooting-clipart-cow-boy-PNG.png', widthGameField);
         loots.push(loot);
         loot.link.style.top = '-' + loot.height + 'px';
+        loot.link.style.transform = `translateX(${loot.x}px)`;
+        console.log(loot.x);
     }
     console.log(loots)
 }
@@ -48,23 +51,29 @@ function startGame(hero) {
             document.getElementById('timer').innerText = 'Timer(sec): ' + defaultTimer;
         }
     }, 1000);
-    moveLoot(loot.link, loot.height + Number(heightGameField.replace('px','')));
+    moveLoot(loot, loot.height + Number(heightGameField.replace('px','')));
     let intervalMovingElements = setInterval(function() {
         let matrix = window.getComputedStyle(loot.link, null).transform;
         matrix = matrix.split(/\(|,\s|\)/).slice(1,7);
-        //console.log(matrix[5]-heightElem.replace('px','')/2);
-        if ((heroX - halfWidthHero < matrix[4]) &&
-            (heroX + halfWidthHero > matrix[4]) &&
-            (heightGameField.replace('px','') - heightHero.replace('px','') < matrix[5]) &&
-            (heightGameField.replace('px','') - heightHero.replace('px','')/2 
-            > matrix[5]-loot.height/2)) {
-            score++;
-            scoreText.innerText = 'Score: ' + score;
-            loot.link.parentNode.removeChild(loot.link);
-            loot = null;
-            //elem = createElement('./img/heroes/shooting-clipart-cow-boy-PNG.png');
-            //elem.style.top = '-' + heightElem;
+        console.log(matrix[5]);
+        if (heightGameField.replace('px','') - heightHero.replace('px','') < matrix[5]) {
+            if (heightGameField.replace('px','') - heightHero.replace('px','')/2 
+            > matrix[5]-loot.height/2) {
+                if ((heroX - halfWidthHero < matrix[4]) &&
+                (heroX + halfWidthHero > matrix[4])) {
+                    score++;
+                    scoreText.innerText = 'Score: ' + score;
+                    loot.link.parentNode.removeChild(loot.link);
+                    loot = null;
+                    
+                }
+            }
+            else if (heightGameField.replace('px','') < matrix[5]-loot.height/2) {
+                loot.link.parentNode.removeChild(loot.link);
+                loot = null;
+            }
         }
+        
         
     }, 50);
 }
