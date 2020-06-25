@@ -1,8 +1,7 @@
-function moveLoot(elem, y) {
-    //elem.style.top = x + Number(elem.style.top.replace('px','')) + 'px';
-    elem.link.style.transition = 'transform 7s linear';
+function moveLoot(elem, y, speed) {
+    //elem.link.style.transition = `transform ${speed}s linear`;
+    elem.link.style.transition = `transform 1.1s linear`;
     elem.link.style.transform = `translate(${elem.x}px, ${y}px)`;
-    console.log(`translate(${elem.x}px, ${y}px)` , elem.link.style.transition);
 }
 function changeMoveSpeed(elem, seconds) {
     elem.style.transition = ''//`transform ${seconds}s linear;`;

@@ -18,6 +18,7 @@ export default function createLoot(srcPicture, width) {
         width: picture.width,
         x: random
     };
+    console.log(picture.height);
     return data;
 }
 
