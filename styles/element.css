@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     /*transition: transform 7s linear;*/
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .image-element {
     display: flex;
@@ -15,5 +15,4 @@
 .image-element img {
     max-height: 100%;
     max-width: 100%;
-    overflow: hidden;
 }

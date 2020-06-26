@@ -1,5 +1,6 @@
 function moveLoot(elem, y, speed) {
     //elem.link.style.transition = `transform ${speed}s linear`;
+    elem.link.style.visibility = 'visible';
     elem.link.style.transition = `transform 1.1s linear`;
     elem.link.style.transform = `translate(${elem.x}px, ${y}px)`;
 }

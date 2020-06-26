@@ -1,24 +1,32 @@
-export default function createLoot(srcPicture, width) {
+export default function createLoot(srcPicture, width, height) {
+    let data = {};
     const field = document.getElementsByClassName('game-field')[0];
     const element = document.createElement('div');
+    data.link = element;
     element.classList.add('element');
     element.id = 'element';
+    element.style.visibility = 'hidden';
     let borderDiv = document.createElement('div');
     let picture = document.createElement('img');
+    data.picture = picture;
     picture.src = srcPicture;
+    //if (picture.height > height)
+    //    picture.height = height;
     borderDiv.classList.add('image-element');
     borderDiv.appendChild(picture);
     element.appendChild(borderDiv);
+    
     //hero.textContent = 'Cowboy';
     field.appendChild(element);
-    let random = Math.floor(Math.random() * (width/2 - (-width/2))) - width/2;
-    let data = {
+    data.height = picture.height;
+    data.width = picture.width;
+    data.x = Math.floor(Math.random() * (width/2 - (-width/2))) - width/2;
+    /*let data = {
         link: element,
         height: picture.height,
         width: picture.width,
-        x: random
-    };
-    console.log(picture.height);
+        x: Math.floor(Math.random() * (width/2 - (-width/2))) - width/2//random
+    };*/
     return data;
 }
 
