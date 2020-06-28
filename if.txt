@@ -1,5 +1,0 @@
-((heroX - halfWidthHero < matrix[4]) &&
-                    (heroX + halfWidthHero > matrix[4]) &&
-                    (heightGameField.replace('px','') - heightHero.replace('px','') < matrix[5]) &&
-                    (heightGameField.replace('px','') - heightHero.replace('px','')/2 
-                    > matrix[5]-loot.height/2))
