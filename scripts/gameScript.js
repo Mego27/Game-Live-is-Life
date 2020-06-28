@@ -3,7 +3,7 @@ import moveHero from './moveHero.js'
 import createLoot from './createLoot.js';
 import {moveLoot, changeMoveSpeed} from './moveLoot.js'
 
-const imagesLoots = ['./img/loots/whiskey2.png',
+const imagesLoots = ['./img/loots/whiskey2v3.png',
 './img/loots/tequila.png',
 './img/loots/beer.png',
 './img/loots/yager.png']
@@ -14,7 +14,8 @@ let heightHero;
 let heightGameField;
 let maxHeightLoot;
 let widthGameField;
-let defaultTimer = 10;
+let defaultTimer = 60;
+let defaultSpeed = 5;
 document.getElementById('timer').innerText = 'Timer(sec): ' + defaultTimer;
 const hero = createHero('./img/heroes/shooting-clipart-cow-boy-PNG.png');
 hero.style.visibility = 'hidden';
@@ -58,18 +59,10 @@ function updateSizeLoot(loots, maxHeightLoot) {
     })
 }
 
-function choiceNewLoot(loots) {
-    loots.forEach(element => {
-        if (element !== undefined)
-            {console.log(element);return element;}
-        else element = createLoot(randomImageLoot(), widthGameField);
-    });
-    return 0
-}
-
 function startGame(hero) {
     updateSizeLoot(loots, maxHeightLoot);
     let currentTimer = defaultTimer;
+    let speed = defaultSpeed;
     let score = 0;
     let index = 0;
     heightHero = window.getComputedStyle(hero, null).height.replace('px','');
@@ -79,7 +72,9 @@ function startGame(hero) {
     increment = defaultIncrement;
     let intervalTimer = setInterval(function() {
         currentTimer--;
-        increment+=3;
+        /*speed-=0.05;
+        increment+=2;*/
+        console.log(speed, increment);
         document.getElementById('timer').innerText = 'Timer(sec): ' + currentTimer;
         if (currentTimer === 0) {
             clearInterval(intervalTimer);
@@ -92,40 +87,44 @@ function startGame(hero) {
             document.getElementById('timer').innerText = 'Timer(sec): ' + defaultTimer;
         }
     }, 1000);
-    moveLoot(loots[index], loots[index].height + Number(heightGameField), 5);
+    moveLoot(loots[index], loots[index].height + Number(heightGameField), speed);
     let trying = 0;
     let intervalMovingElements = setInterval(function() {
         let matrix = window.getComputedStyle(loots[index].link, null).transform;
         matrix = matrix.split(/\(|,\s|\)/).slice(1,7);
-        console.log(matrix[5]);
+        //console.log(matrix[5]);
         if (heightGameField - heightHero < matrix[5]) {
             if (heightGameField - heightHero/2 
             > matrix[5]-loots[index].height/2) {
                 if ((heroX - halfWidthHero < matrix[4]) &&
                 (heroX + halfWidthHero > matrix[4])) {
                     score++;
+                    speed-=0.1;
+                    increment+=2;
                     scoreText.innerText = 'Score: ' + score;
                     updateLoot(loots, index, widthGameField)
                     index++;
-                    moveLoot(loots[index], loots[index].height + Number(heightGameField), 5);
+                    moveLoot(loots[index], loots[index].height + Number(heightGameField), speed);
                 }
             }
-            else if (heightGameField < matrix[5]-loots[index].height/2) {
+            else if (heightGameField <= matrix[5]-loots[index].height*0.9) {
                 updateLoot(loots, index, widthGameField)
+                console.log('Перед trying прок')
                 index++;
-                moveLoot(loots[index], loots[index].height + Number(heightGameField), 5);
+                moveLoot(loots[index], loots[index].height + Number(heightGameField), speed);
             }
-            else if (trying > 5) {
+            /*else if (trying > 5) {
                 updateLoot(loots, index, widthGameField);
-                console.log(trying,'++++')
+                console.log9
+                console.log(trying,'+++++++++++')
                 index++;
-                moveLoot(loots[index], loots[index].height + Number(heightGameField), 5);
+                moveLoot(loots[index], loots[index].height + Number(heightGameField), speed);
             }
-            else trying++;
+            else trying++;*/
         }
         
         
-    }, 50);
+    }, 20);
 }
 
 document.addEventListener('keydown', function(event) {
