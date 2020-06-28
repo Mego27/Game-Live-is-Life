@@ -39,11 +39,13 @@ section {
 .field-hero {
     position: absolute;
     bottom: 0;
-    height: fit-content;
-    min-height: max-content;
+    max-height: 25%;
+    /*height: 15%;
+    min-height: 5%;*/
     width: 100%;
     display: flex;
     justify-content: center;
+    object-fit: fill;
 }
 .button-start {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;

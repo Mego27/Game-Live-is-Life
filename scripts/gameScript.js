@@ -17,10 +17,13 @@ let widthGameField;
 let defaultTimer = 60;
 let defaultSpeed = 5;
 document.getElementById('timer').innerText = 'Timer(sec): ' + defaultTimer;
-const hero = createHero('./img/heroes/shooting-clipart-cow-boy-PNG.png');
+//const hero = createHero('./img/heroes/shooting-clipart-cow-boy-PNG.png');
+const hero = createHero('./img/heroes/cowboy.png');
 hero.style.visibility = 'hidden';
 const halfWidthHero = hero.offsetWidth/2;
 let defaultIncrement = hero.offsetLeft/halfWidthHero*1.5;
+//document.getElementsByClassName('field-hero')[0].style.height = window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).height.replace('px','')*0.15 + 'px';
+//console.log(window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).height)
 let increment = defaultIncrement;
 document.getElementsByClassName('button-start')[0].addEventListener('click', startGame.bind(null, hero, loot));
 const scoreText = document.getElementsByClassName('score-label')[0];
