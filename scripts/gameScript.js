@@ -1,7 +1,7 @@
 import createHero from './createHero.js'
 import moveHero from './moveHero.js'
 import createLoot from './createLoot.js';
-import {moveLoot, changeMoveSpeed} from './moveLoot.js'
+import moveLoot from './moveLoot.js'
 
 const imagesLoots = ['./img/loots/whiskey2v3.png',
 './img/loots/tequila.png',
@@ -22,8 +22,6 @@ const hero = createHero('./img/heroes/cowboy.png');
 hero.style.visibility = 'hidden';
 const halfWidthHero = hero.offsetWidth/2;
 let defaultIncrement = hero.offsetLeft/halfWidthHero*1.5;
-//document.getElementsByClassName('field-hero')[0].style.height = window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).height.replace('px','')*0.15 + 'px';
-//console.log(window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).height)
 let increment = defaultIncrement;
 document.getElementsByClassName('button-start')[0].addEventListener('click', startGame.bind(null, hero, loot));
 const scoreText = document.getElementsByClassName('score-label')[0];
@@ -112,7 +110,6 @@ function startGame(hero) {
             }
             else if (heightGameField <= matrix[5]-loots[index].height*0.9) {
                 updateLoot(loots, index, widthGameField)
-                console.log('Перед trying прок')
                 index++;
                 moveLoot(loots[index], loots[index].height + Number(heightGameField), speed);
             }

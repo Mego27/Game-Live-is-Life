@@ -10,23 +10,14 @@ export default function createLoot(srcPicture, width, height) {
     let picture = document.createElement('img');
     data.picture = picture;
     picture.src = srcPicture;
-    //if (picture.height > height)
-    //    picture.height = height;
     borderDiv.classList.add('image-element');
     borderDiv.appendChild(picture);
     element.appendChild(borderDiv);
-    
     //hero.textContent = 'Cowboy';
     field.appendChild(element);
     data.height = picture.height;
     data.width = picture.width;
     data.x = Math.floor(Math.random() * (width/2 - (-width/2))) - width/2;
-    /*let data = {
-        link: element,
-        height: picture.height,
-        width: picture.width,
-        x: Math.floor(Math.random() * (width/2 - (-width/2))) - width/2//random
-    };*/
     return data;
 }
 
