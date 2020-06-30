@@ -17,13 +17,13 @@ let widthGameField;
 let defaultTimer = 60;
 let defaultSpeed = 5;
 document.getElementById('timer').innerText = 'Timer(sec): ' + defaultTimer;
-//const hero = createHero('./img/heroes/shooting-clipart-cow-boy-PNG.png');
-const hero = createHero('./img/heroes/cowboy.png');
+let hero = createHero('./img/heroes/brunet-cowboy.png');
+//let hero = createHero('./img/heroes/blond-cowboy.png');
 hero.style.visibility = 'hidden';
-const halfWidthHero = hero.offsetWidth/2;
+let halfWidthHero = hero.offsetWidth/2;
 let defaultIncrement = hero.offsetLeft/halfWidthHero*1.5;
 let increment = defaultIncrement;
-document.getElementsByClassName('button-start')[0].addEventListener('click', startGame.bind(null, hero, loot));
+document.getElementsByClassName('button-start')[0].addEventListener('click', startGame.bind(null, hero));
 const scoreText = document.getElementsByClassName('score-label')[0];
 
 window.onload = () => {
@@ -60,7 +60,8 @@ function updateSizeLoot(loots, maxHeightLoot) {
     })
 }
 
-function startGame(hero) {
+function startGame() {
+    let hero = document.getElementById('hero');
     updateSizeLoot(loots, maxHeightLoot);
     let currentTimer = defaultTimer;
     let speed = defaultSpeed;
@@ -69,6 +70,7 @@ function startGame(hero) {
     heightHero = window.getComputedStyle(hero, null).height.replace('px','');
     heightGameField = window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).height.replace('px','');
     document.getElementsByClassName('button-start')[0].style.visibility = 'hidden';
+    document.getElementsByClassName('settings')[0].style.opacity = '0';
     hero.style.visibility = 'visible';
     increment = defaultIncrement;
     let intervalTimer = setInterval(function() {
@@ -85,11 +87,11 @@ function startGame(hero) {
             document.getElementsByClassName('button-start')[0].style.visibility = 'visible';
             hero.style.visibility = 'hidden';
             loots[index].link.style.visibility = 'hidden';
+            document.getElementsByClassName('settings')[0].style.opacity = "1";
             document.getElementById('timer').innerText = 'Timer(sec): ' + defaultTimer;
         }
     }, 1000);
     moveLoot(loots[index], loots[index].height + Number(heightGameField), speed);
-    let trying = 0;
     let intervalMovingElements = setInterval(function() {
         let matrix = window.getComputedStyle(loots[index].link, null).transform;
         matrix = matrix.split(/\(|,\s|\)/).slice(1,7);
@@ -99,7 +101,7 @@ function startGame(hero) {
             > matrix[5]-loots[index].height/2) {
                 if ((heroX - halfWidthHero < matrix[4]) &&
                 (heroX + halfWidthHero > matrix[4])) {
-                    score++;
+                    score+=loots[index].count;
                     speed-=0.1;
                     increment+=2;
                     scoreText.innerText = 'Score: ' + score;
@@ -127,22 +129,45 @@ function startGame(hero) {
     }, 20);
 }
 
+function updateHero() {
+    let hero = document.getElementById('hero');
+    hero.parentNode.removeChild(hero);
+    for (let i = 0; i < document.getElementsByName('hero').length; i++) {
+        if (document.getElementsByName('hero')[i].checked && document.getElementsByName('hero')[i].value === "brunet") {
+            hero = createHero('./img/heroes/brunet-cowboy.png');
+        }
+        if (document.getElementsByName('hero')[i].checked && document.getElementsByName('hero')[i].value === "blond") {
+            hero = createHero('./img/heroes/blond-cowboy.png');
+        }
+    }
+    hero.style.visibility = 'hidden';
+    halfWidthHero = hero.offsetWidth/2;
+    defaultIncrement = hero.offsetLeft/halfWidthHero*1.5;
+    increment = defaultIncrement;
+}
+
+document.getElementsByName('hero').forEach(element => {
+    element.addEventListener('change', updateHero);
+});
+
 document.addEventListener('keydown', function(event) {
+    let hero = document.getElementById('hero');
     if (event.code === 'ArrowRight' && 
-    document.getElementById('hero').offsetLeft > heroX) {
-        if (document.getElementById('hero').offsetLeft >= heroX+increment)
+    hero.offsetLeft > heroX) {
+        if (hero.offsetLeft >= heroX+increment)
             heroX+=increment;
-        else heroX = document.getElementById('hero').offsetLeft;
+        else heroX = hero.offsetLeft;
         moveHero(hero, heroX, 1);
     }
 });
 
 document.addEventListener('keydown', function(event) {
+    let hero = document.getElementById('hero');
     if (event.code === 'ArrowLeft' && 
-    -document.getElementById('hero').offsetLeft < heroX) {
-        if (-document.getElementById('hero').offsetLeft <= heroX-increment)
+    -hero.offsetLeft < heroX) {
+        if (-hero.offsetLeft <= heroX-increment)
             heroX-=increment;
-        else heroX = -document.getElementById('hero').offsetLeft;
+        else heroX = -hero.offsetLeft;
         moveHero(hero, heroX, -1);
     }
 });

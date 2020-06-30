@@ -10,6 +10,23 @@ export default function createLoot(srcPicture, width, height) {
     let picture = document.createElement('img');
     data.picture = picture;
     picture.src = srcPicture;
+    switch (srcPicture) {
+        case './img/loots/whiskey2v3.png': 
+            data.count = 5;
+            break;
+        case './img/loots/tequila.png': 
+            data.count = 4;
+            break;
+        case './img/loots/yager.png': 
+            data.count = 3;
+            break;
+        case './img/loots/beer.png': 
+            data.count = 1;
+            break;
+        default:
+            score++;
+            break;
+    }
     borderDiv.classList.add('image-element');
     borderDiv.appendChild(picture);
     element.appendChild(borderDiv);
