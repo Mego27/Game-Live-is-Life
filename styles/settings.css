@@ -13,12 +13,13 @@
 .choice-hero-radiobuttons {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
 }
 .hero-radiobutton {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 10px 0 10px 10px;
+    margin: 5px 10px;
 }
 .hero-radiobutton input{
     margin: 0 10px;
@@ -39,11 +40,20 @@
     align-items: center;
     justify-content: center;
     outline: none;
-    border: none;
-    background-color: rgb(226, 144, 85);
+    border: 1px solid wheat;
+    border-radius: 7px;
+    background-color: wheat;
     margin: 5px;
-    padding: 2px;
+    padding: 8px;
+    transition: border .2s ease-in .1s;
+}
+.audio-main button:hover, .audio-sounds button:hover {
+    border: 1px solid rgb(24, 24, 24);
+}
+.audio-main button:hover svg, .audio-sounds button:hover svg {
+    transform: scale(1.1, 1.1);
 }
 .audio-main button svg, .audio-sounds button svg {
-    min-width: 2rem;
+    min-width: 1.8rem;
+    transition: transform .2s ease-in .1s;
 }

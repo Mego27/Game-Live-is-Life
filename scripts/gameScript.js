@@ -2,7 +2,8 @@ import createHero from './createHero.js'
 import moveHero from './moveHero.js'
 import createLoot from './createLoot.js';
 import moveLoot from './moveLoot.js'
-//import controlAudio from './controlAudio.js'
+import controlAudio from './controlAudio.js'
+import changeInstanceMusic from './controlAudio.js';
 
 const imagesLoots = ['./img/loots/whiskey2v3.png',
 './img/loots/tequila.png',
@@ -27,7 +28,7 @@ let defaultIncrement = hero.offsetLeft/halfWidthHero*1.5;
 let increment = defaultIncrement;
 document.getElementsByClassName('button-start')[0].addEventListener('click', startGame.bind(null, hero));
 const scoreText = document.getElementsByClassName('score-label')[0];
-
+const btnAudioMain = document.getElementsByClassName('play-pause-music')[0];
 
 window.onload = () => {
     widthGameField = window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).width.replace('px','');
@@ -75,7 +76,6 @@ function startGame() {
     document.getElementsByClassName('button-start')[0].style.visibility = 'hidden';
     document.getElementsByClassName('settings')[0].style.opacity = '0';
     hero.style.visibility = 'visible';
-    increment = defaultIncrement;
     let intervalTimer = setInterval(function() {
         currentTimer--;
         /*speed-=0.05;
@@ -148,6 +148,8 @@ function updateHero() {
     defaultIncrement = hero.offsetLeft/halfWidthHero*1.5;
     increment = defaultIncrement;
 }
+
+btnAudioMain.addEventListener('click', changeInstanceMusic.bind(null, document.getElementById('main-song'), btnAudioMain))
 
 document.getElementsByName('hero').forEach(element => {
     element.addEventListener('change', updateHero);
