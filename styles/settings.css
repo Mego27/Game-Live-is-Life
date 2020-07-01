@@ -1,0 +1,49 @@
+.settings {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 35px 5%;
+    background-color: wheat;
+    transition: opacity .5s ease-in;
+}
+.choice-hero {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+.choice-hero-radiobuttons {
+    display: flex;
+    flex-direction: column;
+}
+.hero-radiobutton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 0 10px 10px;
+}
+.hero-radiobutton input{
+    margin: 0 10px;
+}
+.audio {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 40px;
+}
+.audio-main, .audio-sounds {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.audio-main button, .audio-sounds button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    border: none;
+    background-color: rgb(226, 144, 85);
+    margin: 5px;
+    padding: 2px;
+}
+.audio-main button svg, .audio-sounds button svg {
+    min-width: 2rem;
+}
