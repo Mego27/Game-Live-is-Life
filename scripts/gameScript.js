@@ -1,15 +1,22 @@
 import createHero from './createHero.js'
 import moveHero from './moveHero.js'
-import createLoot from './createLoot.js';
+import createLoot from './createLoot.js'
 import moveLoot from './moveLoot.js'
-import controlAudio from './controlAudio.js'
-import changeInstanceMusic from './controlAudio.js';
+import {changeInstanceMusic, playSound} from './controlAudio.js'
 
 const imagesLoots = ['./img/loots/whiskey2v3.png',
 './img/loots/tequila.png',
 './img/loots/beer.png',
 './img/loots/yager.png']
-const sounds = ['./sounds/'];
+const sounds = {
+    bung: ['./sounds/bung1.mp3',
+        './sounds/bung2.mp3'],
+    sip: ['./sounds/sip1.mp3',
+        './sounds/sip2.mp3'],
+    breaking: ['./sounds/breaking1.mp3',
+        './sounds/breaking2.mp3',
+        './sounds/breaking3.mp3']
+};
 const loots = [];
 let loot;
 let heroX = 0;
@@ -104,17 +111,20 @@ function startGame() {
             > matrix[5]-loots[index].height/2) {
                 if ((heroX - halfWidthHero < matrix[4]) &&
                 (heroX + halfWidthHero > matrix[4])) {
+                    playSound(sounds.bung);
+                    playSound(sounds.sip);
                     score+=loots[index].count;
                     speed-=0.1;
                     increment+=2;
                     scoreText.innerText = 'Score: ' + score;
-                    updateLoot(loots, index, widthGameField)
+                    updateLoot(loots, index, widthGameField);
                     index++;
                     moveLoot(loots[index], loots[index].height + Number(heightGameField), speed);
                 }
             }
             else if (heightGameField <= matrix[5]-loots[index].height*0.9) {
-                updateLoot(loots, index, widthGameField)
+                playSound(sounds.breaking);
+                updateLoot(loots, index, widthGameField);
                 index++;
                 moveLoot(loots[index], loots[index].height + Number(heightGameField), speed);
             }
