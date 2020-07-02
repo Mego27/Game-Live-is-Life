@@ -111,11 +111,10 @@ function startGame() {
             > matrix[5]-loots[index].height/2) {
                 if ((heroX - halfWidthHero < matrix[4]) &&
                 (heroX + halfWidthHero > matrix[4])) {
-                    playSound(sounds.bung);
-                    playSound(sounds.sip);
+                    playSound(sounds.bung, sounds.sip);
                     score+=loots[index].count;
-                    speed-=0.1;
-                    increment+=2;
+                    speed-=0.15;
+                    increment+=1.7;
                     scoreText.innerText = 'Score: ' + score;
                     updateLoot(loots, index, widthGameField);
                     index++;
