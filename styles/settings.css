@@ -49,6 +49,7 @@
 }
 .audio-main button:hover, .audio-sounds button:hover {
     border: 1px solid rgb(24, 24, 24);
+    cursor: pointer;
 }
 .audio-main button:hover svg, .audio-sounds button:hover svg {
     transform: scale(1.1, 1.1);
