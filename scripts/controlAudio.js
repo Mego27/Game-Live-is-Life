@@ -20,5 +20,8 @@ function playSound(sounds1, sounds2) {
     }
     audio1.play();
 }
+function changeInstanceSounds() {
+    
+}
 
-export {changeInstanceMusic, playSound}
+export {changeInstanceMusic, playSound, changeInstanceSounds}

@@ -2,7 +2,7 @@ import createHero from './createHero.js'
 import moveHero from './moveHero.js'
 import createLoot from './createLoot.js'
 import moveLoot from './moveLoot.js'
-import {changeInstanceMusic, playSound} from './controlAudio.js'
+import {changeInstanceMusic, playSound, changeInstanceSounds} from './controlAudio.js'
 
 const imagesLoots = ['./img/loots/whiskey2v3.png',
 './img/loots/tequila.png',
