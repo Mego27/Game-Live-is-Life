@@ -4,6 +4,7 @@ import createLoot from './createLoot.js'
 import moveLoot from './moveLoot.js'
 import {changeInstanceMusic, playSound, changeInstanceSounds} from './controlAudio.js'
 
+localStorage.setItem('isPlayedSounds', true);
 const imagesLoots = ['./img/loots/whiskey2v3.png',
 './img/loots/tequila.png',
 './img/loots/beer.png',
@@ -158,7 +159,8 @@ function updateHero() {
     increment = defaultIncrement;
 }
 
-btnAudioMain.addEventListener('click', changeInstanceMusic.bind(null, document.getElementById('main-song'), btnAudioMain))
+btnAudioMain.addEventListener('click', changeInstanceMusic.bind(null, document.getElementById('main-song'), btnAudioMain));
+document.getElementsByClassName('muting-sounds')[0].addEventListener('click', changeInstanceSounds.bind(null, document.getElementsByClassName('muting-sounds')[0]));
 
 document.getElementsByName('hero').forEach(element => {
     element.addEventListener('change', updateHero);
