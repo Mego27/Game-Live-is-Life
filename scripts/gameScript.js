@@ -2,9 +2,8 @@ import createHero from './createHero.js'
 import moveHero from './moveHero.js'
 import createLoot from './createLoot.js'
 import moveLoot from './moveLoot.js'
-import {changeInstanceMusic, playSound, changeInstanceSounds} from './controlAudio.js'
+import {changeInstanceMusic, playSound, changeInstanceSounds, updateMutingIcon} from './controlAudio.js'
 
-localStorage.setItem('isPlayedSounds', true);
 const imagesLoots = ['./img/loots/whiskey2v3.png',
 './img/loots/tequila.png',
 './img/loots/beer.png',
@@ -37,6 +36,10 @@ let increment = defaultIncrement;
 document.getElementsByClassName('button-start')[0].addEventListener('click', startGame.bind(null, hero));
 const scoreText = document.getElementsByClassName('score-label')[0];
 const btnAudioMain = document.getElementsByClassName('play-pause-music')[0];
+if (localStorage.getItem('isPlayedSounds') === null) {
+    localStorage.setItem('isPlayedSounds', true)
+}
+else updateMutingIcon(localStorage.getItem('isPlayedSounds'), document.getElementsByClassName('muting-sounds')[0]);
 
 window.onload = () => {
     widthGameField = window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).width.replace('px','');
