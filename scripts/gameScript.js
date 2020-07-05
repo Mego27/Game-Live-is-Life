@@ -89,8 +89,6 @@ function startGame() {
     hero.style.visibility = 'visible';
     let intervalTimer = setInterval(function() {
         currentTimer--;
-        /*speed-=0.05;
-        increment+=2;*/
         console.log(speed, increment);
         document.getElementById('timer').innerText = 'Timer(sec): ' + currentTimer;
         if (currentTimer === 0) {
