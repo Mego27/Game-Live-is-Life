@@ -1,6 +1,7 @@
 .settings {
     display: flex;
     flex-wrap: wrap;
+    font-size: calc(1.6vw + 1rem);
     margin: 35px 5%;
     background-color: wheat;
     transition: opacity .5s ease-in;
@@ -9,6 +10,7 @@
     display: flex;
     align-items: center;
     margin-left: 20px;
+    margin-top: 10px;
 }
 .choice-hero-radiobuttons {
     display: flex;
@@ -28,7 +30,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin: 0 40px;
+    margin: 10px 20px;
 }
 .audio-main, .audio-sounds {
     display: flex;
