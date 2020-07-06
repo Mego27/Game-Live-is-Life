@@ -27,7 +27,6 @@ function playSound(sounds1, sounds2) {
     audio1.play();
 }
 function changeInstanceSounds(button) {
-    console.log(localStorage.getItem('isPlayedSounds'));
     if (localStorage.getItem('isPlayedSounds') === 'true') {
         localStorage.setItem('isPlayedSounds', false);
     }

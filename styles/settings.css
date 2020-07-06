@@ -35,6 +35,9 @@
     flex-direction: row;
     align-items: center;
 }
+.audio-main p, .audio-sounds p{
+    margin-right: 10px;
+}
 .audio-main button, .audio-sounds button{
     display: flex;
     align-items: center;

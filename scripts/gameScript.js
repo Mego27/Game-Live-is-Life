@@ -43,6 +43,10 @@ else updateMutingIcon(localStorage.getItem('isPlayedSounds'), document.getElemen
 if (localStorage.getItem('soundsVolume') === null) {
     localStorage.setItem('soundsVolume', 0.3);
 }
+if (localStorage.getItem('musicVolume') === null || isNaN(Number(localStorage.getItem('musicVolume')))) {
+    localStorage.setItem('musicVolume', 0.3);
+    console.log('asdasdsad')
+}
 
 window.onload = () => {
     widthGameField = window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).width.replace('px','');
@@ -164,6 +168,16 @@ function updateHero() {
 }
 
 btnAudioMain.addEventListener('click', changeInstanceMusic.bind(null, document.getElementById('main-song'), btnAudioMain));
+document.getElementsByClassName('inc-volume-music')[0].addEventListener('click', () => {
+    if (localStorage.getItem('musicVolume') < 0.9)
+    localStorage.setItem('musicVolume', Number(localStorage.getItem('musicVolume'))+0.1);
+    document.getElementById('main-song').volume = localStorage.getItem('musicVolume');
+});
+document.getElementsByClassName('dec-volume-music')[0].addEventListener('click', () => {
+    if (localStorage.getItem('musicVolume') > 0.2)
+    localStorage.setItem('musicVolume', Number(localStorage.getItem('musicVolume'))-0.1);
+    document.getElementById('main-song').volume = localStorage.getItem('musicVolume');
+});
 document.getElementsByClassName('muting-sounds')[0].addEventListener('click', changeInstanceSounds.bind(null, document.getElementsByClassName('muting-sounds')[0]));
 document.getElementsByClassName('inc-volume-sounds')[0].addEventListener('click', () => {
     if (localStorage.getItem('soundsVolume') < 0.9)
