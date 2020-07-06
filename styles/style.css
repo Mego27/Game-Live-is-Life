@@ -9,6 +9,7 @@ body {
     display: flex;
     margin: 0;
     font-size: 2em;
+    background-color: #dbdbdb;
     flex-direction: column;
     justify-content: center;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -18,11 +19,14 @@ header {
     justify-content: center;
     font: bold;
     font-size: 3rem;
-    background-color: rgb(243, 146, 66);
+    background-color: rgb(255, 186, 95);
     z-index: 1;
 }
 section {
     margin: 0 5%;
+    border: 2px solid rgb(180, 138, 60);
+    border-top: none;
+    border-radius:  5px;
 }
 .game-field {
     background-color: rgb(216, 169, 81);
