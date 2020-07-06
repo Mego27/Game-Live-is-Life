@@ -11,12 +11,16 @@ function changeInstanceMusic(audioId, button) {
 function playSound(sounds1, sounds2) {
     if (localStorage.getItem('isPlayedSounds') === 'false')
         return;
+    let volume;
+    if (localStorage.getItem('soundsVolume') !== 'NaN')
+        volume = localStorage.getItem('soundsVolume')
+    else volume = 0.3;
     let audio1 = new Audio();
-    audio1.volume = .3;
+    audio1.volume = volume;
     audio1.src = sounds1[Math.floor(Math.random() * (sounds1.length - 0)) + 0];
     if (arguments.length == 2) {
         let audio2 = new Audio();
-        audio2.volume = .3;
+        audio2.volume = volume;
         audio2.src = sounds2[Math.floor(Math.random() * (sounds2.length - 0)) + 0];
         audio1.addEventListener('ended', () => {audio2.play()});
     }

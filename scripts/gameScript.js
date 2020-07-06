@@ -40,6 +40,9 @@ if (localStorage.getItem('isPlayedSounds') === null) {
     localStorage.setItem('isPlayedSounds', true)
 }
 else updateMutingIcon(localStorage.getItem('isPlayedSounds'), document.getElementsByClassName('muting-sounds')[0]);
+if (localStorage.getItem('soundsVolume') === null) {
+    localStorage.setItem('soundsVolume', 0.3);
+}
 
 window.onload = () => {
     widthGameField = window.getComputedStyle(document.getElementsByClassName('game-field')[0], null).width.replace('px','');
@@ -162,6 +165,14 @@ function updateHero() {
 
 btnAudioMain.addEventListener('click', changeInstanceMusic.bind(null, document.getElementById('main-song'), btnAudioMain));
 document.getElementsByClassName('muting-sounds')[0].addEventListener('click', changeInstanceSounds.bind(null, document.getElementsByClassName('muting-sounds')[0]));
+document.getElementsByClassName('inc-volume-sounds')[0].addEventListener('click', () => {
+    if (localStorage.getItem('soundsVolume') < 0.9)
+        localStorage.setItem('soundsVolume', Number(localStorage.getItem('soundsVolume'))+0.1);
+});
+document.getElementsByClassName('dec-volume-sounds')[0].addEventListener('click', () => {
+    if (localStorage.getItem('soundsVolume') > 0.2)
+        localStorage.setItem('soundsVolume', Number(localStorage.getItem('soundsVolume'))-0.1);
+});
 
 document.getElementsByName('hero').forEach(element => {
     element.addEventListener('change', updateHero);
