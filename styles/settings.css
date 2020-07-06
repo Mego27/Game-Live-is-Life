@@ -48,11 +48,15 @@
     background-color: wheat;
     margin: 5px;
     padding: 8px;
-    transition: border .2s ease-in .1s;
+    transition: border .2s ease-in;
 }
 .audio-main button:hover, .audio-sounds button:hover {
     border: 1px solid rgb(24, 24, 24);
     cursor: pointer;
+}
+.audio-main button:active, .audio-sounds button:active {
+    border: 1px solid rgb(0, 0, 0);
+    background-color: rgb(218, 141, 0);
 }
 .audio-main button:hover svg, .audio-sounds button:hover svg {
     transform: scale(1.1, 1.1);
