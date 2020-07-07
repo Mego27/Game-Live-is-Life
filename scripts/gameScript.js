@@ -15,7 +15,8 @@ const sounds = {
         './sounds/sip2.mp3'],
     breaking: ['./sounds/breaking1.mp3',
         './sounds/breaking2.mp3',
-        './sounds/breaking3.mp3']
+        './sounds/breaking3.mp3'],
+    soundVolumeClick: ['./sounds/soundVolumeClick.mp3']
 };
 const loots = [];
 let loot;
@@ -172,11 +173,13 @@ document.getElementsByClassName('inc-volume-music')[0].addEventListener('click',
     if (localStorage.getItem('musicVolume') < 0.9)
     localStorage.setItem('musicVolume', Number(localStorage.getItem('musicVolume'))+0.1);
     document.getElementById('main-song').volume = localStorage.getItem('musicVolume');
+    playSound(sounds.soundVolumeClick);
 });
 document.getElementsByClassName('dec-volume-music')[0].addEventListener('click', () => {
     if (localStorage.getItem('musicVolume') > 0.2)
     localStorage.setItem('musicVolume', Number(localStorage.getItem('musicVolume'))-0.1);
     document.getElementById('main-song').volume = localStorage.getItem('musicVolume');
+    playSound(sounds.soundVolumeClick);
 });
 document.getElementsByClassName('muting-sounds')[0].addEventListener('click', changeInstanceSounds.bind(null, document.getElementsByClassName('muting-sounds')[0]));
 document.getElementsByClassName('inc-volume-sounds')[0].addEventListener('click', () => {
