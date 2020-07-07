@@ -16,7 +16,8 @@ const sounds = {
     breaking: ['./sounds/breaking1.mp3',
         './sounds/breaking2.mp3',
         './sounds/breaking3.mp3'],
-    soundVolumeClick: ['./sounds/soundVolumeClick.mp3']
+    soundVolumeClick: ['./sounds/soundVolumeClick.mp3'],
+    soundVolumeClickError: ['./sounds/soundVolumeClickError.mp3']
 };
 const loots = [];
 let loot;
@@ -170,25 +171,35 @@ function updateHero() {
 
 btnAudioMain.addEventListener('click', changeInstanceMusic.bind(null, document.getElementById('main-song'), btnAudioMain));
 document.getElementsByClassName('inc-volume-music')[0].addEventListener('click', () => {
-    if (localStorage.getItem('musicVolume') < 0.9)
-    localStorage.setItem('musicVolume', Number(localStorage.getItem('musicVolume'))+0.1);
-    document.getElementById('main-song').volume = localStorage.getItem('musicVolume');
-    playSound(sounds.soundVolumeClick);
+    if (localStorage.getItem('musicVolume') < 0.9) {
+        localStorage.setItem('musicVolume', Number(localStorage.getItem('musicVolume'))+0.1);
+        playSound(sounds.soundVolumeClick);
+        document.getElementById('main-song').volume = localStorage.getItem('musicVolume');
+    }
+    else playSound(sounds.soundVolumeClickError);
 });
 document.getElementsByClassName('dec-volume-music')[0].addEventListener('click', () => {
-    if (localStorage.getItem('musicVolume') > 0.2)
-    localStorage.setItem('musicVolume', Number(localStorage.getItem('musicVolume'))-0.1);
-    document.getElementById('main-song').volume = localStorage.getItem('musicVolume');
-    playSound(sounds.soundVolumeClick);
+    if (localStorage.getItem('musicVolume') > 0.2) {
+        localStorage.setItem('musicVolume', Number(localStorage.getItem('musicVolume'))-0.1);
+        document.getElementById('main-song').volume = localStorage.getItem('musicVolume');
+        playSound(sounds.soundVolumeClick);
+    }
+    else playSound(sounds.soundVolumeClickError);
 });
 document.getElementsByClassName('muting-sounds')[0].addEventListener('click', changeInstanceSounds.bind(null, document.getElementsByClassName('muting-sounds')[0]));
 document.getElementsByClassName('inc-volume-sounds')[0].addEventListener('click', () => {
-    if (localStorage.getItem('soundsVolume') < 0.9)
+    if (localStorage.getItem('soundsVolume') < 0.9) {
         localStorage.setItem('soundsVolume', Number(localStorage.getItem('soundsVolume'))+0.1);
+        playSound(sounds.soundVolumeClick);
+    }
+    else playSound(sounds.soundVolumeClickError);
 });
 document.getElementsByClassName('dec-volume-sounds')[0].addEventListener('click', () => {
-    if (localStorage.getItem('soundsVolume') > 0.2)
+    if (localStorage.getItem('soundsVolume') > 0.2) {
         localStorage.setItem('soundsVolume', Number(localStorage.getItem('soundsVolume'))-0.1);
+        playSound(sounds.soundVolumeClick);
+    }
+    else playSound(sounds.soundVolumeClickError);
 });
 
 document.getElementsByName('hero').forEach(element => {
