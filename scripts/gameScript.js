@@ -138,17 +138,7 @@ function startGame() {
                 index++;
                 moveLoot(loots[index], loots[index].height + Number(heightGameField), speed);
             }
-            /*else if (trying > 5) {
-                updateLoot(loots, index, widthGameField);
-                console.log9
-                console.log(trying,'+++++++++++')
-                index++;
-                moveLoot(loots[index], loots[index].height + Number(heightGameField), speed);
-            }
-            else trying++;*/
         }
-        
-        
     }, 20);
 }
 
@@ -169,7 +159,10 @@ function updateHero() {
     increment = defaultIncrement;
 }
 
-btnAudioMain.addEventListener('click', changeInstanceMusic.bind(null, document.getElementById('main-song'), btnAudioMain));
+btnAudioMain.addEventListener('click', function() {
+    changeInstanceMusic(document.getElementById('main-song'), btnAudioMain);
+    playSound(sounds.soundVolumeClick);
+});
 document.getElementsByClassName('inc-volume-music')[0].addEventListener('click', () => {
     if (localStorage.getItem('musicVolume') < 0.9) {
         localStorage.setItem('musicVolume', Number(localStorage.getItem('musicVolume'))+0.1);
@@ -186,7 +179,10 @@ document.getElementsByClassName('dec-volume-music')[0].addEventListener('click',
     }
     else playSound(sounds.soundVolumeClickError);
 });
-document.getElementsByClassName('muting-sounds')[0].addEventListener('click', changeInstanceSounds.bind(null, document.getElementsByClassName('muting-sounds')[0]));
+document.getElementsByClassName('muting-sounds')[0].addEventListener('click', function() {
+    changeInstanceSounds(document.getElementsByClassName('muting-sounds')[0]);
+    playSound(sounds.soundVolumeClick);
+});
 document.getElementsByClassName('inc-volume-sounds')[0].addEventListener('click', () => {
     if (localStorage.getItem('soundsVolume') < 0.9) {
         localStorage.setItem('soundsVolume', Number(localStorage.getItem('soundsVolume'))+0.1);
